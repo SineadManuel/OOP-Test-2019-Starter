@@ -7,7 +7,8 @@ import processing.data.Table;
 import processing.data.TableRow;
 
 public class UI extends PApplet {
-
+	Resistor res;
+	
 	ArrayList<Color> colors = new ArrayList<Color>();
 	ArrayList<Resistor> resistors = new ArrayList<Resistor>();
 
@@ -50,12 +51,18 @@ public class UI extends PApplet {
 	}
 
 	public void loadResistors() {
-		Table t = loadTable("resistors.csv", "header");
+		Table t = loadTable("resistors.csv");
 		for(TableRow r:t.rows())
         {
             Resistor resistor = new Resistor(r);
             resistors.add(resistor);
         }
+	}
+
+	public void printResistors() {
+		for(Resistor r:resistors) {
+			println(r);
+		}
 	}
 
 	public void settings()
@@ -65,17 +72,20 @@ public class UI extends PApplet {
 		separate(381);
 		separate(1);
 		separate(92);
-		loadColours();
-		printColours();
-		println(findColor(1));
-
 	}
 
 	public void setup() 
 	{
+		loadColours();
+		printColours();
+		println(findColor(1));
+		loadResistors();
+		printResistors();
+		res = new Resistor(this, 618);
 	}
 	
 	public void draw()
-	{			
+	{
+		res.render();
 	}
 }

@@ -2,11 +2,13 @@ package ie.tudublin;
 
 import processing.data.TableRow;
 
-public class Resistor {
+public class Resistor extends UI {
     public int value, ones, tens, hundreds;
+    UI ui;
 
-    public Resistor(int value) {
+    public Resistor(UI ui, int value) {
         this.value = value;
+        this.ui = ui;
 
         hundreds = (value / 100);
         tens = (value - (hundreds * 100)) / 10;
@@ -14,6 +16,19 @@ public class Resistor {
     }
 
     public Resistor(TableRow r) {
-        this(r.getInt("value"));
+        // this(r.getInt());
+    }
+
+    @Override
+    public String toString() {
+        return "Resistor [hundreds=" + hundreds + ", ones=" + ones + ", tens=" + tens + ", value=" + value + "]";
+    }
+
+    // public Resistor(UI ui) {
+    // }
+
+    public void render() {
+        ui.rectMode(CENTER);
+        ui.rect(250,100,100,100);
     }
 }
